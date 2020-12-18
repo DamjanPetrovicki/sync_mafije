@@ -684,7 +684,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		if PlayerData.job and (PlayerData.job.name == poslovi ) then
+		if PlayerData.job and (poslovi) then
 			if IsControlJustReleased(0, 167) and not isDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'mafia_actions') then
 				OtvoriPosaoMenu()
 			end
