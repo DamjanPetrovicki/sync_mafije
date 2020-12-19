@@ -11,4 +11,4 @@ All credit goes to ESX, sogolisica and me (sync)
 
 #3. Import that sql file
 
-## I know this isn't the best explanation, I'll make a video tutorial soon
+## https://streamable.com/ssoytn <-- VIDEO TUTORIAL
