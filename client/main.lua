@@ -272,7 +272,6 @@ function OtvoriNjegovMeni(player)
 			table.insert(elements, {label = _U('dob', data.dob)})
 			table.insert(elements, {label = _U('height', data.height)})
 
-
 			if data.drunk then
 			table.insert(elements, {label = _U('bac', data.drunk)})
 			end
@@ -530,19 +529,21 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	PlayerData.job = job
 end)
 
--------MAFIJA DRAWMARKERS i POSLOVI----------
+-------MAFIJA DRAWMARKERS i POSLOVI-------
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(5)
-		if PlayerData.job and (poslovi) then
+		Citizen.Wait(1)
+		local letSleep = true
+		if PlayerData.job and poslovi and PlayerData.job.name ~= 'unemployed' and PlayerData.job.name ~= 'slaughterer' and PlayerData.job.name ~= 'fisherman' and PlayerData.job.name ~= 'miner' and PlayerData.job.name ~= 'lumberjack' and PlayerData.job.name ~= 'police' and PlayerData.job.name ~= 'fueler' and PlayerData.job.name ~= 'reporter' and PlayerData.job.name ~= 'taxi' and PlayerData.job.name ~= 'mechanic' and PlayerData.job.name ~= 'ambulance' then
 			local playerPed = PlayerPedId()
 			local coords = GetEntityCoords(playerPed)
-			local isInMarker, hasExited, letSleep = false, false, true
+			local isInMarker, hasExited, letSleep = false, false, false
 			local currentStation, currentPart, currentPartNum
 			if Config.Mafije[PlayerData.job.name] == nil then
 				return
@@ -642,9 +643,8 @@ Citizen.CreateThread(function()
 			end
 
 			if letSleep then
-				Citizen.Wait(1000)
+				Citizen.Wait(500)
 			end
-
 		else
 			Citizen.Wait(500)
 		end
@@ -684,7 +684,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		if PlayerData.job and (poslovi) then
+		if PlayerData.job and poslovi and PlayerData.job.name ~= 'police' and PlayerData.job.name ~= 'ambulance' and PlayerData.job.name ~= 'mechanic' and PlayerData.job.name ~= 'taxi' then
 			if IsControlJustReleased(0, 167) and not isDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'mafia_actions') then
 				OtvoriPosaoMenu()
 			end
