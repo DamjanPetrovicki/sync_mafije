@@ -773,7 +773,7 @@ function OpenBuyWeaponsMenu()
 	local elements = {}
 	local playerPed = PlayerPedId()
 
-	for k,v in ipairs(Config.Oruzje[ESX.PlayerData.job.grade_name]) do
+	for k,v in ipairs(Config.Oruzje[PlayerData.job.grade_name]) do
 		local weaponNum, weapon = ESX.GetWeapon(v.weapon)
 		local components, label = {}
 		local hasWeapon = HasPedGotWeapon(playerPed, GetHashKey(v.weapon), false)
