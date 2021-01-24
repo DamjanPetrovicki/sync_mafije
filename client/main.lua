@@ -4,7 +4,7 @@ local LastStation, LastPart, LastPartNum, CurrentAction, CurrentActionMsg
 dragStatus.isDragged = false
 ESX = nil
 
-local poslovi = "PlayerData.job.name == 'zg80' or PlayerData.job.name == 'vagos' or PlayerData.job.name == 'automafija' or PlayerData.job.name == 'pinkpanteri' or PlayerData.job.name == 'crnogorci' or PlayerData.job.name == 'cartel' or PlayerData.job.name == 'gsf'"
+local poslovi = PlayerData.job.name == 'zg80' or PlayerData.job.name == 'vagos' or PlayerData.job.name == 'automafija' or PlayerData.job.name == 'pinkpanteri' or PlayerData.job.name == 'crnogorci' or PlayerData.job.name == 'cartel' or PlayerData.job.name == 'gsf'
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -208,7 +208,7 @@ end
 function OtvoriPosaoMenu()
 	ESX.UI.Menu.CloseAll()
 
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'panteri_actions', {
+	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'sync_f6', {
 		css      = 'vagos',
 		title    = 'Meni Mafije | 🎩',
 		align    = 'top-left',
@@ -540,7 +540,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1)
 		local letSleep = true
-		if PlayerData.job and poslovi and PlayerData.job.name ~= 'unemployed' and PlayerData.job.name ~= 'slaughterer' and PlayerData.job.name ~= 'fisherman' and PlayerData.job.name ~= 'miner' and PlayerData.job.name ~= 'lumberjack' and PlayerData.job.name ~= 'police' and PlayerData.job.name ~= 'fueler' and PlayerData.job.name ~= 'reporter' and PlayerData.job.name ~= 'taxi' and PlayerData.job.name ~= 'mechanic' and PlayerData.job.name ~= 'ambulance' then
+		if PlayerData.job and poslovi then
 			local playerPed = PlayerPedId()
 			local coords = GetEntityCoords(playerPed)
 			local isInMarker, hasExited, letSleep = false, false, false
@@ -684,8 +684,8 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		if PlayerData.job and poslovi and PlayerData.job.name ~= 'police' and PlayerData.job.name ~= 'ambulance' and PlayerData.job.name ~= 'mechanic' and PlayerData.job.name ~= 'taxi' then
-			if IsControlJustReleased(0, 167) and not isDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'mafia_actions') then
+		if PlayerData.job and poslovi then
+			if IsControlJustReleased(0, 167) and not isDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'sync_f6') then
 				OtvoriPosaoMenu()
 			end
 		end
